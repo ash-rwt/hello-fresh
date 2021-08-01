@@ -1,0 +1,25 @@
+version: "3"
+services:
+    api-gateway:
+        build: "./backend"
+        ports:
+            - 7201:7100
+        depends_on:
+            - hello-fresh-db
+        volumes:
+            - ./backend:/app
+        environment:
+            - DB_URI=postgresql://root:root123@hello-fresh-db/db
+    hello-fresh-db:
+        image: postgres
+        restart: always
+        environment:
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=root123
+            - POSTGRES_DB=db
+        ports:
+            - 0.0.0.0:7200:5432
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+volumes:
+    pgdata:
