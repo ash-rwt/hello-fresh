@@ -3,7 +3,7 @@ services:
     api-gateway:
         build: "./backend"
         ports:
-            - 7201:7100
+            - 7201:7201
         depends_on:
             - hello-fresh-db
         volumes:
